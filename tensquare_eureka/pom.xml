@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>tensquare_parent</artifactId>
+        <groupId>com.tensquare</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>tensquare_eureka</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- docker的maven插件，官网：
+            https://github.com/spotify/docker-maven-plugin -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <!-- 镜像名称
+                           有两种形式：
+                           1）tensquare_eureka:1.0-SNAPSHOT : tensquare_eureka镜像名称，1.0-SNAPSHOT： 标签，只能在Docker本地仓库构建处理
+                           2）192.168.66.133:5000/tensquare_eureka:1.0-SNAPSHOT: 192.168.66.133:5000是Docker的私服地址，既能在本地仓库构建，也能上传到私服
+                    -->
+                    <imageName>192.168.207.111:5000/${project.artifactId}:${project.version}</imageName>
+                    <!-- FROM jdk1.8 -->
+                    <baseImage>jdk1.8</baseImage>
+                    <!-- ENTRYPOINT ["java","-jar","/app.jar"] -->
+                    <entryPoint>["java", "-jar","/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <!-- ADD app.jar /app.jar -->
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <!-- 2375: Docker专门为DockerMaven插件开放构建镜像的端口 -->
+                    <dockerHost>http://192.168.207.111:2375</dockerHost>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

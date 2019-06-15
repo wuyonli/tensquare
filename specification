@@ -1,0 +1,27 @@
+tensquare_manager  是管理后台微服务网关  低下管理的微服务有:
+            tensquare-gathering: #活动
+            tensquare-article: #文章
+            tensquare-base: #基础
+            tensquare-friend: #交友
+            tensquare-qa: #问答
+            tensquare-recruit: #招聘
+            tensquare-spit: #吐槽
+            tensquare-user: #用户
+
+tensquare_web  是网站前台的微服务网关
+                   tensquare-gathering: #活动
+                        tensquare-article: #文章
+                        tensquare-base: #基础
+                        tensquare-friend: #交友
+                        tensquare-qa: #问答
+                        tensquare-recruit: #招聘
+                        tensquare-spit: #吐槽
+                        tensquare-user: #用户
+                         tensquare-search: #用户
+
+
+tensquare_config :  是配置中心微服务  用于配置统一管理全部微服务的 配置文件的   .yml
+全部的微服务的.yml配置文件已经上传到码云中  通过这个微服务 连接 码云和各个微服务.
+
+消息总线SpringCloudBus :我们更新码云中的配置文件后，对应的微服务工程师不能及时更新,,需要重新启动服务才可以
+更新,,但是有了springCloudBus 后就可以是不需要重启服务也可以更新了.

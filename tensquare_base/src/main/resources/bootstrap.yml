@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      uri: http://192.168.207.111:12000  # springCloudConfig  server 地址
+      name: base  # 应用名称   profile:环境名称  配置文件名称: name-profile.yml 或 properties
+      profile: dev
+      label: master   # 仓库的分支名称

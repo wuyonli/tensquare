@@ -1,0 +1,27 @@
+server: 
+  port: 9003
+spring: 
+  application:  
+    name: tensquare-qa #指定服务名
+  datasource:  
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.207.111:3306/tensquare_qa?useUnicode=true&characterEncoding=UTF8&useSSL=false
+    username: root
+    password: 123456
+  jpa: 
+    database: MySQL
+    show-sql: true
+eureka:
+  client:
+    service-url:  # 配置 eureka 服务器的地址
+      defaultZone: http://127.0.0.1:6868/eureka
+    instance:  # 这个要写.
+      prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+
+
+
+
+

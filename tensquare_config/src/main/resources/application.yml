@@ -1,0 +1,15 @@
+server:
+  port: 12000
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/yonglimayun/tensquare-config.git #username:  如果是私有仓库，需要配置用户名密码                                                                #password:
+  rabbitmq:
+    host: 192.168.207.111
+management: #暴露触发消息总线的地址
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
