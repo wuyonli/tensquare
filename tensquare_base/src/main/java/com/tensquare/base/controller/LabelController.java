@@ -61,7 +61,7 @@ public class LabelController {
         return new Result(true,StatusCode.OK,"查询成功",list);
     }
 
-    // 分页查询
+    // 分页查询2222222222
     @RequestMapping(value = "/search/{page}/{size}",method = RequestMethod.POST)
     public Result search(@PathVariable int page,@PathVariable int size,@RequestBody Map searchMap){
         Page<Label> pageData = labelService.findSearch(page,size,searchMap);
